@@ -27,12 +27,13 @@ resource "aws_api_gateway_integration" "integration" {
 }
 
 resource "aws_lambda_permission" "apigw_lambda" {
-  statement_id  = "AllowLambdaExecutionForAPIGateway-${var.api_name}"
+  count         = length(var.http_methods)
+  statement_id  = "AllowLambdaExecutionForAPIGateway-${var.api_name}-${var.http_methods[count.index]}"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.lambda.function_name
   principal     = "apigateway.amazonaws.com"
 
-  source_arn = "arn:aws:execute-api:${var.region}:${local.account_id}:${aws_api_gateway_rest_api.api.id}/*/*"
+  source_arn = "arn:aws:execute-api:${var.region}:${local.account_id}:${aws_api_gateway_rest_api.api.id}/*/${aws_api_gateway_method.method[count.index].http_method}${aws_api_gateway_resource.resource.path}"
 }
 
 resource "aws_api_gateway_deployment" "deployment" {
