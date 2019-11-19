@@ -11,9 +11,9 @@ variable environment_variables {
   default = {}
 }
 
-variable http_method {
-  type    = string
-  default = "GET"
+variable http_methods {
+  type    = list(string)
+  default = ["GET"]
 }
 
 variable lambda_function_name {
