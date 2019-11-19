@@ -32,7 +32,7 @@ data "aws_iam_policy_document" "lambda" {
 }
 
 resource "aws_iam_policy" "lambda" {
-  name   = "LambdaFunctionLogginPolicy-${var.lambda_function_name}"
+  name   = "LambdaFunctionLoggingPolicy-${var.lambda_function_name}"
   policy = data.aws_iam_policy_document.lambda.json
 }
 
