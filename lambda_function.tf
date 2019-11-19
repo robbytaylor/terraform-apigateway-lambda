@@ -15,8 +15,12 @@ resource "aws_lambda_function" "lambda" {
     ignore_changes = ["last_modified", "source_code_hash"]
   }
 
-  environment {
-    variables = var.environment_variables
+  dynamic environment {
+    for_each = length(var.environment_variables) > 0 ? [true] : []
+
+    content {
+      variables = var.environment_variables
+    }
   }
 }
 
