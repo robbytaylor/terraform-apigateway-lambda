@@ -12,7 +12,7 @@ resource "aws_lambda_function" "lambda" {
   runtime       = var.lambda_runtime
 
   lifecycle {
-    ignore_changes = ["last_modified", "source_code_hash"]
+    ignore_changes = ["filename", "last_modified", "source_code_hash"]
   }
 
   dynamic environment {
