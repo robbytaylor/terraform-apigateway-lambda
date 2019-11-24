@@ -49,3 +49,8 @@ variable stage {
   type    = string
   default = "prod"
 }
+
+variable tags {
+  type    = map
+  default = {}
+}

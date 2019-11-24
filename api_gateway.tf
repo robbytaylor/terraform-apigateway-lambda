@@ -1,5 +1,6 @@
 resource "aws_api_gateway_rest_api" "api" {
   name = var.api_name
+  tags = var.tags
 }
 
 resource "aws_api_gateway_resource" "resource" {
@@ -47,4 +48,6 @@ resource "aws_api_gateway_stage" "stage" {
   stage_name    = var.stage
   rest_api_id   = aws_api_gateway_rest_api.api.id
   deployment_id = aws_api_gateway_deployment.deployment.id
+
+  tags = var.tags
 }
